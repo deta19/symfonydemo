@@ -2,28 +2,36 @@
 
 namespace App\Entity;
 
-use App\Repository\TeamProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TeamProjectRepository::class)
+ * TeamProject
+ *
+ * @ORM\Table(name="team_project")
+ * @ORM\Entity
  */
 class TeamProject
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
     private $user_id;
 
@@ -46,13 +54,24 @@ class TeamProject
 
     public function getUserId(): ?int
     {
+//dd( "dddd", $this->user_id );
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): self
+    public function setUserId(int $user_id ): self
     {
-        $this->user_id = $user_id;
+//        $user_id =  $userid->getId();s
+//        dd( "set",  $user_id  );
 
+//        $this->user_id = $userid->getId();
+        $this->user_id = $user_id;
         return $this;
     }
+    
+    
+    public function __toString(){
+       return $this->getUserId();
+   }
+
+
 }

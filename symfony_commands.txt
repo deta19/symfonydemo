@@ -1,0 +1,39 @@
+commands:
+php bin/console debug:router
+php bin/console cache:clear
+https://symfony.com/doc/4.1/routing/debug.html
+
+
+needed 
+
+composer require symfony/apache-pack
+composer require --dev symfony/var-dumper
+
+composer require symfony/form
+composer require symfony/validator
+composer require symfony/security-csrf
+
+follow 
+https://www.binaryboxtuts.com/php-tutorials/how-to-make-a-user-login-and-register-in-symfony-5/#Step_1_Install_Symfony_5
+
+
+
+https://symfony.com/doc/current/doctrine.html#configuring-the-database
+
+composer require symfony/orm-pack
+modificai .env cu datele de access mysql
+php bin/console doctrine:database:create
+
+php bin/console make:entity
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+composer require symfony/maker-bundle
+
+php bin/console debug:form
+create controllers
+
+php bin/console make:controller ProductController
+
+get routes
+php bin/console debug:router

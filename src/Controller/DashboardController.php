@@ -7,9 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\TeamHtml;
-use App\Entity\TeamProject;
+
 use App\Form\AddHtmlType;
 use App\Form\AddProjectType;
+
+use App\Entity\TeamProject;
+use App\Entity\User;
 
 class DashboardController extends AbstractController
 {
@@ -72,20 +75,30 @@ class DashboardController extends AbstractController
      */
     public function add_project(Request $request): Response
     {
-        $formProject = $this->createForm(AddProjectType::class);
-        
+        $teamProject = new TeamProject();
+        $formProject = $this->createForm( AddProjectType::class, $teamProject );
+       
         if ($request->isMethod('POST')) {
-            
-            $formProject->handleRequest($request);
 
+//  dd( "before handle", $request );
+  
+            $formProject->handleRequest( $request );
+            
+// dd( "after handle" , $formProject );
+   
+ 
             if ($formProject->isSubmitted() && $formProject->isValid()) {
+                
                 $teamProject = new TeamProject();
                 $em = $this->getDoctrine()->getManager();
                 $form_data = $formProject->getData();
-                
+
+//dd( "ok form", $form_data );
+                       
                 $teamProject->setName($form_data->getName());
-                $teamProject->setUserId($form_data->getUserId());
-              
+                $teamProject->setUserId( $form_data->getUserId() );
+                
+//dd(  $teamProject );       
                 $em->persist($teamProject);
 
                 $em->flush();

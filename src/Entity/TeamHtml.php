@@ -2,35 +2,45 @@
 
 namespace App\Entity;
 
-use App\Repository\TeamHtmlRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TeamHtmlRepository::class)
+ * TeamHtml
+ *
+ * @ORM\Table(name="team_html")
+ * @ORM\Entity
  */
 class TeamHtml
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="html", type="string", length=255, nullable=true)
      */
     private $html;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="css", type="string", length=255, nullable=true)
      */
     private $css;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @var int|null
+     *
+     * @ORM\Column(name="project_id", type="integer", nullable=true)
      */
-    private $project_id;
+    private $projectId;
 
     public function getId(): ?int
     {
@@ -63,13 +73,15 @@ class TeamHtml
 
     public function getProjectId(): ?int
     {
-        return $this->project_id;
+        return $this->projectId;
     }
 
-    public function setProjectId(?int $project_id): self
+    public function setProjectId(?int $projectId): self
     {
-        $this->project_id = $project_id;
+        $this->projectId = $projectId;
 
         return $this;
     }
+
+
 }
